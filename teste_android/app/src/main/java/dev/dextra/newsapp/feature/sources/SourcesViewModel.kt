@@ -37,14 +37,14 @@ class SourcesViewModel(private val newsRepository: NewsRepository) : BaseViewMod
     }
 
     fun changeCountry(country: Country?) {
-        if (Country.ALL.equals(country)) selectedCountry = null
+        if (Country.ALL == country) selectedCountry = null
         else selectedCountry = country
         loadSources()
     }
 
     fun changeCategory(category: Category) {
-        if (Category.ALL.equals(category)) selectedCategory = Category.GENERAL
-        else selectedCategory = category
+        selectedCategory = if (Category.ALL == category) Category.GENERAL
+        else category
         loadSources()
     }
 }
