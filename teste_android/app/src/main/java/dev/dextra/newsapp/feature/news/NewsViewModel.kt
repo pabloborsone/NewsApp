@@ -31,4 +31,8 @@ class NewsViewModel(
                 })
         )
     }
+
+    fun changePages() {
+
+    }
 }
