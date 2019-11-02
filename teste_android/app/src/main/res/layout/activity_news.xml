@@ -27,16 +27,16 @@
             android:id="@+id/news_next_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Next"
+            android:text="@string/next_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/news_previous"
+            android:id="@+id/news_previous_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Previous"
+            android:text="@string/previous_button"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

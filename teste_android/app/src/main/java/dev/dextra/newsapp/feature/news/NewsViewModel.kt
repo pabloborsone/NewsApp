@@ -18,21 +18,16 @@ class NewsViewModel(
         this.source = source
     }
 
-    //transform this into pages
-    fun loadNews() {
+    fun loadNews(page: Int) {
         newsActivity.showLoading()
         addDisposable(
-            newsRepository.getEverything(source?.id).subscribe({ response ->
-                newsActivity.showData(response.articles)
+            newsRepository.getEverything(source?.id, page).subscribe({
+                newsActivity.showData(it.articles)
                 newsActivity.hideLoading()
             },
                 {
                     newsActivity.hideLoading()
                 })
         )
-    }
-
-    fun changePages() {
-
     }
 }

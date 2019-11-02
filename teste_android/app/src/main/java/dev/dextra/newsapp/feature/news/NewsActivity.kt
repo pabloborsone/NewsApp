@@ -4,7 +4,9 @@ import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.view.Window
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import dev.dextra.newsapp.R
 import dev.dextra.newsapp.api.model.Article
@@ -20,6 +22,9 @@ const val NEWS_ACTIVITY_SOURCE = "NEWS_ACTIVITY_SOURCE"
 class NewsActivity : AppCompatActivity() {
 
     private val newsViewModel = NewsViewModel(NewsRepository(EndpointService()), this)
+    private lateinit var nextButton: Button
+    private lateinit var previousButton: Button
+    private var currentPage = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_news)
@@ -29,14 +34,40 @@ class NewsActivity : AppCompatActivity() {
 
             loadNews(source)
         }
+        nextButton = findViewById(R.id.news_next_button)
+        previousButton = findViewById(R.id.news_previous_button)
 
+        changeButtonVisibility()
+        nextButton.setOnClickListener {
+            currentPage++
+            changeButtonVisibility()
+            newsViewModel.loadNews(currentPage)
+        }
+        previousButton.setOnClickListener {
+            currentPage--
+            changeButtonVisibility()
+            newsViewModel.loadNews(currentPage)
+        }
         super.onCreate(savedInstanceState)
 
     }
 
+    private fun changeButtonVisibility() {
+        if (currentPage == 1) {
+            previousButton.visibility = View.GONE
+        } else {
+            previousButton.visibility = View.VISIBLE
+        }
+        if (currentPage != 5) {
+            nextButton.visibility = View.VISIBLE
+        } else {
+            nextButton.visibility = View.GONE
+        }
+    }
+
     private fun loadNews(source: Source) {
         newsViewModel.configureSource(source)
-        newsViewModel.loadNews()
+        newsViewModel.loadNews(currentPage)
     }
 
     fun onClick(article: Article) {
