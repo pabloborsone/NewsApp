@@ -60,7 +60,6 @@
                         android:layout_height="wrap_content"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
-r
             </LinearLayout>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

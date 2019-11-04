@@ -15,7 +15,7 @@ class SourcesViewModel(private val newsRepository: NewsRepository) : BaseViewMod
     val networkState = MutableLiveData<NetworkState>()
 
     private var selectedCountry: Country? = null
-    private var selectedCategory: Category? = Category.GENERAL
+    private var selectedCategory: Category? = null
 
     fun loadSources() {
         networkState.postValue(NetworkState.RUNNING)
@@ -43,7 +43,7 @@ class SourcesViewModel(private val newsRepository: NewsRepository) : BaseViewMod
     }
 
     fun changeCategory(category: Category) {
-        selectedCategory = if (Category.ALL == category) Category.GENERAL
+        selectedCategory = if (Category.ALL == category) null
         else category
         loadSources()
     }
